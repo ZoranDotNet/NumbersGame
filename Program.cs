@@ -2,15 +2,14 @@
 {//Zoran Matovic NET23
     internal class Program
     {
-        //METHOD - We get a random number
-        internal static int GetRandomNr(int maxValue)
+        internal static int GetRandomNr(int maxValue)  //METHOD - We get a random number
         {
-            int max = maxValue + 1;
             Random random = new Random();
-            return random.Next(1, max);
+            return random.Next(1, maxValue + 1);
         }
-        //METHOD - We check userGuess against winnerNr
-        internal static void CheckGuess(int guess, int correctNr)
+
+
+        internal static void CheckGuess(int guess, int correctNr, int rounds)    //METHOD - We check userGuess against winnerNr
         {
             if (guess < correctNr)
             {
@@ -23,15 +22,18 @@
             else
             {
                 Console.WriteLine("\nWooho! Du gissade rätt"); // correct guess
+                Console.WriteLine($"Du behövde {rounds} gissningar.");
             }
 
-            if (guess - correctNr < 2 && guess - correctNr > 0)
+            int difference = Math.Abs(correctNr - guess);
+
+            if (difference == 1)
             {
-                Console.WriteLine("Nu va du riktigt nära."); //if user is high but very close
+                Console.WriteLine("Nu bränns det!!");
             }
-            else if (correctNr - guess < 2 && correctNr - guess > 0)
+            else if (difference == 2)
             {
-                Console.WriteLine("Nu bränns det!"); //if user is low but very close
+                Console.WriteLine("Det börjar närma sig!");
             }
 
         }
@@ -40,150 +42,91 @@
 
         static void Main(string[] args)
         {
-            bool loop;
-            bool loop2;
-            bool loop3 = false;
-=========
->>>>>>>>> Temporary merge branch 2
-            bool loop3 = false;
-=========
->>>>>>>>> Temporary merge branch 2
-            bool loop3 = false;
-=========
->>>>>>>>> Temporary merge branch 2
-            bool loop3 = false;
-=========
->>>>>>>>> Temporary merge branch 2
-            bool loop3 = false;
-=========
->>>>>>>>> Temporary merge branch 2
+            bool playAgain;
             int rounds = 0;
-            int userGuess = 0;
+            int userGuess;
             int winner;
             int maxNr = 0;
             int maxRounds = 0;
-            int meny = 0;
+            int menuChoise;
 
 
             Console.WriteLine("Välkommen till gissa numret.");
-            Console.WriteLine("Jag tänker på ett nummer. Du ska gissa vilket?");
+            Console.WriteLine("Jag tänker på ett nummer, gissa vilket!");
 
             do
             {
+
+                Console.WriteLine("\n********MENY********");
+                Console.WriteLine("********************");
+                Console.WriteLine("* 1 * Lätt  (1-10) *");
+                Console.WriteLine("* 2 * Medel (1-20) *");
+                Console.WriteLine("* 3 * Svår  (1-50) *");
+                Console.WriteLine("* 4 * Custom       *");
+                Console.WriteLine("********************");
+                Console.WriteLine();
+                Console.Write("Välj ");
+
+
+                while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4)
+                {
+                    Console.WriteLine("Välj endast 1-4!");
+                }
+
+
+
+
+
+                switch (menuChoise)
+                {
+                    case 1:               //Lätt - user get 5 guesses, random 1-10
+                        maxRounds = 5;
+                        maxNr = 10;
+                        break;
+
+                    case 2:               //Medel - user get 6 guesses, random 1-20
+                        maxRounds = 6;
+                        maxNr = 20;
+                        break;
+
+
+                    case 3:               // Svår - user get 5 guesses, random 1-50
+                        maxRounds = 5;
+                        maxNr = 50;
+                        break;
+
+                    case 4:                //Custom - user can choose maxRounds and maxNr                       
+                        Console.WriteLine("Hur många gissningar?");
+                        while (!int.TryParse(Console.ReadLine(), out maxRounds) || maxRounds < 1)
+                        {
+                            Console.WriteLine("Endast heltal, försök igen!");
+                        }
+
+
+                        Console.WriteLine("Jag kommer tänka på ett tal mellan 1-? Du väljer maxgräns själv. Ange maxtal");
+                        while (!int.TryParse(Console.ReadLine(), out maxNr) || maxNr < 1)
+                        {
+                            Console.WriteLine("Endast heltal, försök igen!");
+                        }
+                        break;
+
+                }
+
+
+                winner = GetRandomNr(maxNr);  //call method to get the winning nr
+
                 do
                 {
-                    Console.WriteLine("\n********MENY********");
-                    Console.WriteLine("********************");
-                    Console.WriteLine("* 1 * Lätt  (1-10) *");
-                    Console.WriteLine("* 2 * Medel (1-20) *");
-                    Console.WriteLine("* 3 * Svår  (1-50) *");
-                    Console.WriteLine("* 4 * Custom       *");
-                    Console.WriteLine("********************");
-                    Console.WriteLine();
-                    Console.Write("Välj ");
-                    try
-                    {
-                        meny = Convert.ToInt32(Console.ReadLine());
-                    }
-                    catch (FormatException ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        loop2 = false;
+                    Console.Write("Ange ett nr ");
 
+                    while (!int.TryParse(Console.ReadLine(), out userGuess))
+                    {
+                        Console.WriteLine("Skriv endast in heltal, försök igen");
                     }
 
-
-                    switch (meny)
-                    {
-                        case 1: //Lätt - user get 5 guesses, 1-10
-                            maxRounds = 5;
-                            maxNr = 10;
-                            loop2 = true;
-                            break;
-
-                        case 2: //Medel - user get 6 guesses, 1-20
-                            bool check2 = false;
-=========
->>>>>>>>> Temporary merge branch 2
-
-
-                        case 3:// Svår - user get 5 guesses, 1-50
-                            maxRounds = 5;
-                            maxNr = 50;
-                            loop2 = true;
-                            break;
-
-
-                                check = false;
-                            }
-                            while (!check)
-                            {
-                                Console.WriteLine("Jag kommer tänka på ett tal mellan 1-? Du väljer maxgräns själv. Ange maxtal");
-                                check = int.TryParse(Console.ReadLine(), out temp2);
-                            int temp2 = 0;
-                                if (!check) { Console.WriteLine("Endast heltal, försök igen!"); }
-                            }
-
-                            maxRounds = temp;
-                            maxNr = temp2;
-                            loop2 = true;
-                            break;
-                            check = false;
-
-                        default:
-                            {
-                                Console.WriteLine("Jag kommer tänka på ett tal mellan 1-? Du väljer maxgräns själv. Ange maxtal");
-                                check = int.TryParse(Console.ReadLine(), out temp2);
-
-                                if (!check)
-
-                    }
-                                    Console.WriteLine("Endast heltal, försök igen!");
-                                }
-
-                            }
-
-                while (rounds < maxRounds)
-                {
-                    int temp = 0;
-                    {
-                        Console.Write("Ange ett nr ");
-                    winner = GetRandomNr(maxNr);//call method to get the winning nr
-                        {
-                            Console.WriteLine("Skriv endast in heltal, försök igen");
-                        }
-                    while (!loop3)
-                    }
-                    userGuess = temp;
-                    rounds++;
-                    {
-                        Console.Write("Ange ett nr ");
-                        check = int.TryParse(Console.ReadLine(), out temp);
-
-                        if (!check)
->>>>>>>>> Temporary merge branch 2
-                        {
-                            Console.WriteLine("Skriv endast in heltal, försök igen");
-                        }
-
-                    }
-<<<<<<<<< Temporary merge branch 1
-                    loop3 = false;
-=========
-                    check = false;
->>>>>>>>> Temporary merge branch 2
-                    userGuess = temp;
                     rounds++;
 
-                        CheckGuess(userGuess, winner);
-
-                        if (userGuess == winner)
-                        {
-                            Console.WriteLine($"Du behövde {rounds} gissningar.");
-                            break;
-                        }
-
-                    }
+                    CheckGuess(userGuess, winner, rounds);
 
 
                     if (rounds >= maxRounds && userGuess != winner)
@@ -192,35 +135,33 @@
                         Console.WriteLine($"Det rätta numret var {winner} ");
                     }
 
-                    Console.WriteLine("\nVill du spela igen?"); //ask user to play again j/n 
-                    Console.WriteLine("j/n");
-                    string answer = Console.ReadLine();
+                } while (rounds < maxRounds && userGuess != winner);
+
+                Console.WriteLine("\nVill du spela igen?"); //ask user to play again j/n 
+                Console.Write("j/n  ");
+                string answer = Console.ReadLine();
 
 
+                if (answer == "j" || answer == "J")   //if J/j game starts again
+                {
+                    playAgain = true;
+                    rounds = 0;
+                }
+                else if (answer == "n" || answer == "N")   //if N/n game will end
+                {
+                    Console.WriteLine("spelet avslutas...");
+                    playAgain = false;
+                }
+                else
+                {
+                    playAgain = false;     // if user types something else than j/n game will end
 
-            Console.ReadKey();
-                    {
-
-        }
+                }
 
 
-                        rounds = 0;
+            } while (playAgain);
 
 
-}
-
-                    else if (answer == "n") //if n game will end
-                    {
-                        Console.WriteLine("spelet avslutas...");
-                        loop = true;
-                    }
-                    else
-                    {
-                        loop = true; // if user types something else than j/n game will end
-
-                    }
-
-                } while (!loop);
 
             Console.ReadKey();
 
