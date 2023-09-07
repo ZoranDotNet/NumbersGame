@@ -42,6 +42,7 @@
         {
             bool loop;
             bool loop2;
+            bool loop3 = false;
             int rounds = 0;
             int userGuess = 0;
             int winner;
@@ -102,6 +103,7 @@
 
                         case 4: // Custom - user choose number of guesses and maxnr
                             bool check = false;
+                            bool check2 = false;
                             int temp = 0;
                             int temp2 = 0;
 
@@ -114,98 +116,84 @@
                                 {
                                     Console.WriteLine("Endast heltal, försök igen!");
                                 }
-
-                            }
-                            check = false;
-                            while (!check)
-                            {
-                                Console.WriteLine("Jag kommer tänka på ett tal mellan 1-? Du väljer maxgräns själv. Ange maxtal");
-                                check = int.TryParse(Console.ReadLine(), out temp2);
-
-                                if (!check)
                                 {
-                                    Console.WriteLine("Endast heltal, försök igen!");
+                                    Console.WriteLine("Jag kommer tänka på ett tal mellan 1-? Du väljer maxgräns själv. Ange maxtal");
+
+                                    if (!check2) { Console.WriteLine("Endast heltal, försök igen!"); }
                                 }
 
+                                maxRounds = temp;
+                                maxNr = temp2;
+                                loop2 = true;
+                                break;
+
+                                default:
+                            Console.WriteLine("Välj ett nr 1-4");
+                                meny = 0;
+                                loop2 = false;
+                                break;
+
                             }
 
-                            maxRounds = temp;
-                            maxNr = temp2;
-                            loop2 = true;
-                            break;
+                    } while (!loop2) ;
 
-                        default:
-                            Console.WriteLine("Välj ett nr 1-4");
-                            meny = 0;
-                            loop2 = false;
-                            break;
+                    winner = GetRandomNr(maxNr);//call method to get the winning nr
 
-                    }
-
-                } while (!loop2);
-
-                winner = GetRandomNr(maxNr);//call method to get the winning nr
-
-                while (rounds < maxRounds)
-                {
-                    int temp = 0;
-                    bool check = false;
-                    while (!check)
+                    while (rounds < maxRounds)
                     {
-                        Console.Write("Ange ett nr ");
-                        check = int.TryParse(Console.ReadLine(), out temp);
-
-                        if (!check)
+                        int temp = 0;
                         {
-                            Console.WriteLine("Skriv endast in heltal, försök igen");
+                            Console.Write("Ange ett nr ");
+
+                            {
+                                Console.WriteLine("Skriv endast in heltal, försök igen");
+                            }
+
+                        }
+                        userGuess = temp;
+                        rounds++;
+
+                        CheckGuess(userGuess, winner);
+
+                        if (userGuess == winner)
+                        {
+                            Console.WriteLine($"Du behövde {rounds} gissningar.");
+                            break;
                         }
 
                     }
-                    check = false;
-                    userGuess = temp;
-                    rounds++;
 
-                    CheckGuess(userGuess, winner);
 
-                    if (userGuess == winner)
+                    if (rounds >= maxRounds && userGuess != winner)
                     {
-                        Console.WriteLine($"Du behövde {rounds} gissningar.");
-                        break;
+                        Console.WriteLine("\nDina gissningar är tyvärr slut");
+                        Console.WriteLine($"Det rätta numret var {winner} ");
                     }
 
-                }
+                    Console.WriteLine("\nVill du spela igen?"); //ask user to play again j/n 
+                    Console.WriteLine("j/n");
+                    string answer = Console.ReadLine();
 
+                    if (answer == "j")// if j we loop back again
+                    {
+                        loop = false;
+                        rounds = 0;
+                    }
+                    else if (answer == "n") //if n game will end
+                    {
+                        Console.WriteLine("spelet avslutas...");
+                        loop = true;
+                    }
+                    else
+                    {
+                        loop = true; // if user types something else than j/n game will end
 
-                if (rounds >= maxRounds && userGuess != winner)
-                {
-                    Console.WriteLine("\nDina gissningar är tyvärr slut");
-                    Console.WriteLine($"Det rätta numret var {winner} ");
-                }
+                    }
 
-                Console.WriteLine("\nVill du spela igen?"); //ask user to play again j/n 
-                Console.WriteLine("j/n");
-                string answer = Console.ReadLine();
+                } while (!loop);
 
-                if (answer == "j")// if j we loop back again
-                {
-                    loop = false;
-                    rounds = 0;
-                }
-                else if (answer == "n") //if n game will end
-                {
-                    Console.WriteLine("spelet avslutas...");
-                    loop = true;
-                }
-                else
-                {
-                    loop = true; // if user types something else than j/n game will end
+                Console.ReadKey();
 
-                }
-
-            } while (!loop);
-
-            Console.ReadKey();
-
-        }
+            }
     }
-}
+    }
