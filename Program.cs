@@ -114,19 +114,14 @@
                                 {
                                     Console.WriteLine("Endast heltal, försök igen!");
                                 }
-
+                                check = false;
                             }
-                            check = false;
                             while (!check)
                             {
                                 Console.WriteLine("Jag kommer tänka på ett tal mellan 1-? Du väljer maxgräns själv. Ange maxtal");
                                 check = int.TryParse(Console.ReadLine(), out temp2);
 
-                                if (!check)
-                                {
-                                    Console.WriteLine("Endast heltal, försök igen!");
-                                }
-
+                                if (!check) { Console.WriteLine("Endast heltal, försök igen!"); }
                             }
 
                             maxRounds = temp;
@@ -134,11 +129,13 @@
                             loop2 = true;
                             break;
 
+
                         default:
                             Console.WriteLine("Välj ett nr 1-4");
                             meny = 0;
                             loop2 = false;
                             break;
+
 
                     }
 
@@ -149,19 +146,14 @@
                 while (rounds < maxRounds)
                 {
                     int temp = 0;
-                    bool check = false;
-                    while (!check)
                     {
                         Console.Write("Ange ett nr ");
-                        check = int.TryParse(Console.ReadLine(), out temp);
 
-                        if (!check)
                         {
                             Console.WriteLine("Skriv endast in heltal, försök igen");
                         }
 
                     }
-                    check = false;
                     userGuess = temp;
                     rounds++;
 
@@ -204,8 +196,16 @@
 
             } while (!loop);
 
+
+
             Console.ReadKey();
 
+
         }
+
+
     }
+
+
 }
+
