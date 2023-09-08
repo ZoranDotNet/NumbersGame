@@ -68,7 +68,7 @@
                 Console.Write("Välj ");
 
 
-                while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4)
+                while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4) //if user choose other than 1-4
                 {
                     Console.WriteLine("Välj endast 1-4!");
                 }
@@ -125,7 +125,6 @@
                     }
 
                     rounds++;
-
                     CheckGuess(userGuess, winner, rounds);
 
 
@@ -139,15 +138,15 @@
 
                 Console.WriteLine("\nVill du spela igen?"); //ask user to play again j/n 
                 Console.Write("j/n  ");
-                string answer = Console.ReadLine();
+                string answer = Console.ReadLine().ToLower();
 
 
-                if (answer == "j" || answer == "J")   //if J/j game starts again
+                if (answer == "j")   //if j game starts again
                 {
                     playAgain = true;
                     rounds = 0;
                 }
-                else if (answer == "n" || answer == "N")   //if N/n game will end
+                else if (answer == "n")   //if n game will end
                 {
                     Console.WriteLine("spelet avslutas...");
                     playAgain = false;
@@ -160,6 +159,8 @@
 
 
             } while (playAgain);
+
+
 
 
 
