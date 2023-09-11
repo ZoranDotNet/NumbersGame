@@ -27,7 +27,7 @@
 
             int difference = Math.Abs(correctNr - guess);
 
-            if (difference == 1)
+            if (difference == 1)  // if user is close we show a message
             {
                 Console.WriteLine("Nu bränns det!!");
             }
@@ -125,13 +125,13 @@
                     }
 
                     rounds++;
-                    CheckGuess(userGuess, winner, rounds);
+                    CheckGuess(userGuess, winner, rounds);  // call method to check userGuess against winner
 
 
                     if (rounds >= maxRounds && userGuess != winner)
                     {
-                        Console.WriteLine("\nDina gissningar är tyvärr slut");
-                        Console.WriteLine($"Det rätta numret var {winner} ");
+                        Console.WriteLine("\nDina gissningar är tyvärr slut");  //if user have no more guesses
+                        Console.WriteLine($"Det rätta numret var {winner} ");  // we show winning number
                     }
 
                 } while (rounds < maxRounds && userGuess != winner);
@@ -144,7 +144,7 @@
                 if (answer == "j")   //if j game starts again
                 {
                     playAgain = true;
-                    rounds = 0;
+                    rounds = 0;   // we reset rounds to 0
                 }
                 else if (answer == "n")   //if n game will end
                 {
