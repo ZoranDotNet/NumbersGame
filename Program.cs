@@ -25,15 +25,15 @@
                 Console.WriteLine($"Du behövde {rounds} gissningar.");
             }
 
-            int difference = Math.Abs(correctNr - guess);
+            int difference = Math.Abs(correctNr - guess);   // if user is close we show a message
 
-            if (difference == 1)  // if user is close we show a message
+            if (difference == 1)
             {
-                Console.WriteLine("Nu bränns det!!");
+                Console.WriteLine("Nu bränns det!!");  //1 nr away
             }
             else if (difference == 2)
             {
-                Console.WriteLine("Det börjar närma sig!");
+                Console.WriteLine("Det börjar närma sig!");  // 2 nr away
             }
 
         }
@@ -42,7 +42,7 @@
 
         static void Main(string[] args)
         {
-            bool playAgain;
+            bool playAgain;          // declaring variables
             int rounds = 0;
             int userGuess;
             int winner;
@@ -51,13 +51,12 @@
             int menuChoise;
 
 
-            Console.WriteLine("Välkommen till gissa numret.");
-            Console.WriteLine("Jag tänker på ett nummer, gissa vilket!");
+            Console.WriteLine("Välkommen till gissa numret.\nJag tänker på ett nummer, gissa vilket!");
 
             do
             {
 
-                Console.WriteLine("\n********MENY********");
+                Console.WriteLine("\n********MENY********");   //display menu to user
                 Console.WriteLine("********************");
                 Console.WriteLine("* 1 * Lätt  (1-10) *");
                 Console.WriteLine("* 2 * Medel (1-20) *");
@@ -68,8 +67,8 @@
                 Console.Write("Välj ");
 
 
-                while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4) //if user choose other than 1-4
-                {
+                while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4) //if user choose other than 1-4 
+                {                                                                                            //or write other than numbers
                     Console.WriteLine("Välj endast 1-4!");
                 }
 
@@ -117,14 +116,14 @@
 
                 do
                 {
-                    Console.Write("Ange ett nr ");
+                    Console.Write("Ange ett nr ");        //prompt user to make a guess
 
-                    while (!int.TryParse(Console.ReadLine(), out userGuess))
+                    while (!int.TryParse(Console.ReadLine(), out userGuess))    //TryParse to make sure program does not crash
                     {
-                        Console.WriteLine("Skriv endast in heltal, försök igen");
+                        Console.Write("Skriv endast in heltal, försök igen \nAnge ett nr ");
                     }
 
-                    rounds++;
+                    rounds++;                                //increment variable to keep count on how many guesses user have done
                     CheckGuess(userGuess, winner, rounds);  // call method to check userGuess against winner
 
 
@@ -134,16 +133,16 @@
                         Console.WriteLine($"Det rätta numret var {winner} ");  // we show winning number
                     }
 
-                } while (rounds < maxRounds && userGuess != winner);
+                } while (rounds < maxRounds && userGuess != winner);  //we keep looping until user wins or have no more guesses
 
                 Console.WriteLine("\nVill du spela igen?"); //ask user to play again j/n 
                 Console.Write("j/n  ");
-                string answer = Console.ReadLine().ToLower();
+                string answer = Console.ReadLine().ToLower();  //make sure answer is lowercase
 
 
                 if (answer == "j")   //if j game starts again
                 {
-                    playAgain = true;
+                    playAgain = true;  //set to true so Do-While loops again
                     rounds = 0;   // we reset rounds to 0
                 }
                 else if (answer == "n")   //if n game will end
