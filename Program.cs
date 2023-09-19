@@ -152,6 +152,7 @@
                 }
                 else
                 {
+                    Console.WriteLine("spelet avslutas...");
                     playAgain = false;     // if user types something else than j/n game will end
 
                 }
