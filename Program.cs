@@ -145,15 +145,10 @@
                     playAgain = true;  //set to true so Do-While loops again
                     rounds = 0;   // we reset rounds to 0
                 }
-                else if (answer == "n")   //if n game will end
+                else             // if n or if user types something else we end program
                 {
                     Console.WriteLine("spelet avslutas...");
                     playAgain = false;
-                }
-                else
-                {
-                    Console.WriteLine("spelet avslutas...");
-                    playAgain = false;     // if user types something else than j/n game will end
 
                 }
 
