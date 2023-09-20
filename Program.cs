@@ -64,12 +64,12 @@
                 Console.WriteLine("* 4 * Custom       *");
                 Console.WriteLine("********************");
                 Console.WriteLine();
-                Console.Write("Välj ");
+                Console.Write("Val: ");
 
 
                 while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4) //if user choose other than 1-4 
                 {                                                                                            //or write other than numbers
-                    Console.WriteLine("Välj endast 1-4!");
+                    Console.Write("Välj endast 1-4! \nVal: ");
                 }
 
 
