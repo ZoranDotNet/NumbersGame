@@ -2,14 +2,15 @@
 {//Zoran Matovic NET23
     internal class Program
     {
-        internal static int GetRandomNr(int maxValue)  //METHOD - We get a random number
+        //METHOD - We get a random number
+        internal static int GetRandomNr(int maxValue)
         {
             Random random = new Random();
             return random.Next(1, maxValue + 1);
         }
 
-
-        internal static void CheckGuess(int guess, int correctNr, int rounds)    //METHOD - We check userGuess against winnerNr
+        //METHOD - We check userinput against winning number
+        internal static void CheckGuess(int guess, int correctNr, int rounds)
         {
             if (guess < correctNr)
             {
@@ -61,7 +62,7 @@
                 Console.WriteLine("* 1 * Lätt  (1-10) *");
                 Console.WriteLine("* 2 * Medel (1-20) *");
                 Console.WriteLine("* 3 * Svår  (1-50) *");
-                Console.WriteLine("* 4 * Custom       *");
+                Console.WriteLine("* 4 * Välj själv   *");
                 Console.WriteLine("********************");
                 Console.WriteLine();
                 Console.Write("Val: ");
@@ -95,17 +96,17 @@
                         break;
 
                     case 4:                //Custom - user can choose maxRounds and maxNr                       
-                        Console.WriteLine("Hur många gissningar?");
+                        Console.Write("Hur många gissningar? ");
                         while (!int.TryParse(Console.ReadLine(), out maxRounds) || maxRounds < 1)
                         {
-                            Console.WriteLine("Endast heltal, försök igen!");
+                            Console.Write("Endast heltal, försök igen!\nHur många gissningar? ");
                         }
 
 
-                        Console.WriteLine("Jag kommer tänka på ett tal mellan 1-? Du väljer maxgräns själv. Ange maxtal");
+                        Console.Write("\nJag kommer tänka på ett tal mellan 1-? \nDu väljer maxgräns själv. Ange maxtal ");
                         while (!int.TryParse(Console.ReadLine(), out maxNr) || maxNr < 1)
                         {
-                            Console.WriteLine("Endast heltal, försök igen!");
+                            Console.Write("Endast heltal, försök igen!\nAnge maxtal ");
                         }
                         break;
 
