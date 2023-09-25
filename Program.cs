@@ -70,7 +70,8 @@
 
                 while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4) //if user choose other than 1-4 
                 {                                                                                            //or write other than numbers
-                    Console.Write("Välj endast 1-4! \nVal: ");
+                    Console.WriteLine("Välj endast 1-4!");
+                    Console.Write("Val: ");
                 }
 
 
@@ -99,15 +100,18 @@
                         Console.Write("Hur många gissningar? ");
                         while (!int.TryParse(Console.ReadLine(), out maxRounds) || maxRounds < 1)
                         {
-                            Console.Write("Endast heltal, försök igen!\nHur många gissningar? ");
+                            Console.WriteLine("Endast heltal, försök igen!");
+                            Console.Write("Hur många gissningar? ");
                         }
 
 
-                        Console.Write("\nJag kommer tänka på ett tal mellan 1-? \nDu väljer maxgräns själv. Ange maxtal ");
+                        Console.Write("\nJag kommer tänka på ett tal mellan 1-? \nDu väljer maxgräns själv. \nAnge maxtal ");
                         while (!int.TryParse(Console.ReadLine(), out maxNr) || maxNr < 1)
                         {
-                            Console.Write("Endast heltal, försök igen!\nAnge maxtal ");
+                            Console.WriteLine("Endast heltal, försök igen!");
+                            Console.Write("Ange maxtal ");
                         }
+
                         break;
 
                 }
@@ -121,7 +125,8 @@
 
                     while (!int.TryParse(Console.ReadLine(), out userGuess))    //TryParse to make sure program does not crash
                     {
-                        Console.Write("Skriv endast in heltal, försök igen \nAnge ett nr ");
+                        Console.WriteLine("Skriv endast in heltal, försök igen.");
+                        Console.Write("Ange ett nr ");
                     }
 
                     rounds++;                                //increment variable to keep count on how many guesses user have done
