@@ -2,8 +2,8 @@
 {//Zoran Matovic NET23
     internal class Program
     {
-        //METHOD - We get a random number
-        internal static int GetRandomNr(int maxValue)
+        //METHOD - We get a random number               - For this game it´s ok to instantiate random inside method - 
+        internal static int GetRandomNr(int maxValue)   //For more random nr we could instantiate in Main and pass as argument.
         {
             Random random = new Random();
             return random.Next(1, maxValue + 1);
@@ -22,11 +22,14 @@
             }
             else
             {
-                Console.WriteLine("\nWooho! Du gissade rätt"); // correct guess
+                Console.WriteLine("Wooho! Du gissade rätt"); // correct guess
                 Console.WriteLine($"Du behövde {rounds} gissningar.");
             }
-
-            int difference = Math.Abs(correctNr - guess);   // if user is close we show a message
+        }
+        //METHOD - We check if userinput is close, alerts user if the guess is close.
+        internal static void CheckIfClose(int guess, int correctNr)
+        {
+            int difference = Math.Abs(correctNr - guess);
 
             if (difference == 1)
             {
@@ -36,7 +39,6 @@
             {
                 Console.WriteLine("Det börjar närma sig!");  // 2 nr away
             }
-
         }
 
 
@@ -121,7 +123,7 @@
 
                 do
                 {
-                    Console.Write("Ange ett nr ");        //prompt user to make a guess
+                    Console.Write("\nAnge ett nr ");        //prompt user to make a guess
 
                     while (!int.TryParse(Console.ReadLine(), out userGuess))    //TryParse to make sure program does not crash
                     {
@@ -131,6 +133,7 @@
 
                     rounds++;                                //increment variable to keep count on how many guesses user have done
                     CheckGuess(userGuess, winner, rounds);  // call method to check userGuess against winner
+                    CheckIfClose(userGuess, winner);
 
 
                     if (rounds >= maxRounds && userGuess != winner)
