@@ -2,8 +2,8 @@
 {//Zoran Matovic NET23
     internal class Program
     {
-        //METHOD - We get a random number               - For this game it´s ok to instantiate random inside method - 
-        internal static int GetRandomNr(int maxValue)   //For more random nr we could instantiate in Main and pass as argument.
+        //METHOD - We get a random number                
+        internal static int GetRandomNr(int maxValue)
         {
             Random random = new Random();
             return random.Next(1, maxValue + 1);
@@ -133,7 +133,7 @@
 
                     rounds++;                                //increment variable to keep count on how many guesses user have done
                     CheckGuess(userGuess, winner, rounds);  // call method to check userGuess against winner
-                    CheckIfClose(userGuess, winner);
+                    CheckIfClose(userGuess, winner);        // call method to see if userinput is close
 
 
                     if (rounds >= maxRounds && userGuess != winner)
