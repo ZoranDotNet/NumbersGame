@@ -65,7 +65,7 @@
             }
             else
             {
-                Console.WriteLine("Wooho! Du gissade rätt"); // correct guess
+                Console.WriteLine("Wooho! Du gissade rätt"); // correct guess and we display nr of guesses
                 Console.WriteLine($"Du behövde {rounds} gissningar.");
             }
         }
@@ -156,7 +156,7 @@
                             Console.WriteLine("Endast heltal, försök igen!");
                             Console.Write("Ange maxtal ");
                         }
-
+                        Console.WriteLine($"Du får {maxRounds} gissningar att hitta numret mellan 1-{maxNr}");
                         break;
 
                 }
