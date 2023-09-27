@@ -9,7 +9,7 @@
         }
 
         //METHOD - Our gamelogic
-        internal static void PlayGame(int maxNr, int maxRounds, int winner)
+        internal static void PlayGame(int maxNr, int maxRounds, int winner, Random random)
         {
             int userGuess = 0;
             int rounds = 0;
@@ -30,7 +30,7 @@
                 }
 
                 rounds++;                                //keep count on how many guesses
-                CheckGuess(userGuess, winner, rounds);   // check userGuess against the winning number
+                CheckGuess(userGuess, winner, rounds, random);   // check userGuess against the winning number
                 CheckIfClose(userGuess, winner);         // if user is wrong but close we give a special message
 
 
@@ -44,15 +44,24 @@
         }
 
         //METHOD - We check userinput against winning number
-        internal static void CheckGuess(int guess, int correctNr, int rounds)
+        internal static void CheckGuess(int guess, int correctNr, int rounds, Random random)
         {
+            // array of strings with different answers 
+            string[] lowAnswers = {"Nu gissade du lågt", "Kom igen högre kan du", "Tyvärr din gissning var för låg",
+                                    "Too low", "Du får ta i lite mer det va för lågt", "Gissa högre nästa gång", };
+
+            string[] highAnswers = {"Nu tog du i för mycket", "Du gissade för högt", "Gissa lägre nästa gång", "Tyvärr för högt",
+                                    "Too high", "Gissningen var för hög"};
+
             if (guess < correctNr)
             {
-                Console.WriteLine("Du gissade för lågt!"); //if user guess low
+                string low = lowAnswers[random.Next(lowAnswers.Length)]; //if user guess low we get a random answer from array
+                Console.WriteLine(low);
             }
             else if (guess > correctNr)
             {
-                Console.WriteLine("Du gissade för högt!"); // if user guess high
+                string high = highAnswers[random.Next(highAnswers.Length)];  //if user guess high we get a random answer from array
+                Console.WriteLine(high);
             }
             else
             {
@@ -85,7 +94,7 @@
             int maxNr = 0;
             int maxRounds = 0;
             int menuChoise;
-            Random random = new Random();
+            Random random = new();
 
 
             Console.WriteLine("Välkommen till gissa numret.\nJag tänker på ett nummer, gissa vilket!");
@@ -133,15 +142,15 @@
                         break;
 
                     case 4:                //Custom - user can choose maxRounds and maxNr                       
-                        Console.Write("Hur många gissningar? ");
+                        Console.Write("Hur många gissningar vill du ha? ");
                         while (!int.TryParse(Console.ReadLine(), out maxRounds) || maxRounds < 1)
                         {
                             Console.WriteLine("Endast heltal, försök igen!");
-                            Console.Write("Hur många gissningar? ");
+                            Console.Write("Hur många gissningar vill du ha? ");
                         }
 
 
-                        Console.Write("\nJag kommer tänka på ett tal mellan 1-?\nAnge maxtal ");
+                        Console.Write("\nJag tänker på ett tal mellan 1-???\nAnge maxtal ");
                         while (!int.TryParse(Console.ReadLine(), out maxNr) || maxNr < 1)
                         {
                             Console.WriteLine("Endast heltal, försök igen!");
@@ -153,8 +162,8 @@
                 }
 
 
-                winner = GetRandomNr(random, maxNr);  //call method to get the winning nr
-                PlayGame(maxNr, maxRounds, winner);  //call method with gamelogic
+                winner = GetRandomNr(random, maxNr);  //call method to get the winning number
+                PlayGame(maxNr, maxRounds, winner, random);  //call method for gamelogic
 
 
                 Console.WriteLine("\nVill du spela igen?"); //ask user to play again j/n 
@@ -165,6 +174,7 @@
                 if (answer == "j")   //if j game starts again
                 {
                     playAgain = true;
+                    Console.Clear();
                 }
                 else             // if n or if user types something else we end program
                 {
