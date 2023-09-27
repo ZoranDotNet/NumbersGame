@@ -56,12 +56,12 @@
             if (guess < correctNr)
             {
                 string low = lowAnswers[random.Next(lowAnswers.Length)]; //if user guess low we get a random answer from array
-                Console.WriteLine(low);
+                Console.WriteLine($"Gissning {rounds}: {low}");
             }
             else if (guess > correctNr)
             {
                 string high = highAnswers[random.Next(highAnswers.Length)];  //if user guess high we get a random answer from array
-                Console.WriteLine(high);
+                Console.WriteLine($"Gissning {rounds}: {high}");
             }
             else
             {
