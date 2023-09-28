@@ -29,9 +29,9 @@
                     continue;
                 }
 
-                rounds++;                                //keep count on how many guesses
+                rounds++;
                 CheckGuess(userGuess, winner, rounds, random);   // check userGuess against the winning number
-                CheckIfClose(userGuess, winner);         // if user is wrong but close we give a special message
+                CheckIfClose(userGuess, winner);         // check if guess is close - then give a special message
 
 
                 if (rounds >= maxRounds && userGuess != winner)
@@ -40,7 +40,7 @@
                     Console.WriteLine($"Det rätta numret var {winner} ");  // we show winning number
                 }
 
-            } while (rounds < maxRounds && userGuess != winner);  //we keep looping until user wins or have no more guesses
+            } while (rounds < maxRounds && userGuess != winner);  //we keep looping until user wins or is out of guesses
         }
 
         //METHOD - We check userinput against winning number
@@ -162,7 +162,7 @@
                 }
 
 
-                winner = GetRandomNr(random, maxNr);  //call method to get the winning number
+                winner = GetRandomNr(random, maxNr);  //call method to get the random winning number
                 PlayGame(maxNr, maxRounds, winner, random);  //call method for gamelogic
 
 
