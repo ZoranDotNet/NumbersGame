@@ -17,7 +17,7 @@
             {
                 Console.Write("\nAnge ett nr ");        //prompt user to make a guess
 
-                while (!int.TryParse(Console.ReadLine(), out userGuess))    //TryParse to make sure program does not crash
+                while (!int.TryParse(Console.ReadLine(), out userGuess))
                 {
                     Console.WriteLine("Skriv endast in heltal, försök igen.");
                     Console.Write("Ange ett nr ");
@@ -31,7 +31,7 @@
 
                 rounds++;
                 CheckGuess(userGuess, winner, rounds, random);   // check userGuess against the winning number
-                CheckIfClose(userGuess, winner);         // check if guess is close - then give a special message
+                CheckIfClose(userGuess, winner);         // check if guess is close - if it is give a special message
 
 
                 if (rounds >= maxRounds && userGuess != winner)
@@ -93,7 +93,7 @@
             int winner;
             int maxNr = 0;
             int maxRounds = 0;
-            int menuChoise;
+            int menu;
             Random random = new();
 
 
@@ -113,14 +113,14 @@
                 Console.Write("Val: ");
 
 
-                while (!int.TryParse(Console.ReadLine(), out menuChoise) || menuChoise < 1 || menuChoise > 4) //if user choose other than 1-4 
+                while (!int.TryParse(Console.ReadLine(), out menu) || menu < 1 || menu > 4) //if user choose other than 1-4 
                 {                                                                                            //or write other than numbers
                     Console.WriteLine("Välj endast 1-4!");
                     Console.Write("Val: ");
                 }
 
 
-                switch (menuChoise)
+                switch (menu)
                 {
                     case 1:               //Lätt - user get 5 guesses, random 1-10
                         maxRounds = 5;
