@@ -51,7 +51,7 @@
                                     "Too low", "Du får ta i lite mer det va för lågt", "Gissa högre nästa gång", };
 
             string[] highAnswers = {"Nu tog du i för mycket", "Du gissade för högt", "Gissa lägre nästa gång", "Tyvärr för högt",
-                                    "Too high", "Gissningen var för hög"};
+                                    "Too high", "Mitt nummer är lägre"};
 
             if (guess < correctNr)
             {
